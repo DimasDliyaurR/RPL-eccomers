@@ -8,6 +8,6 @@ class appController extends Controller
 {
     public function index()
     {
-        return view("home.app");
+        return view("home.main");
     }
 }
