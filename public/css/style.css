@@ -1,75 +1,23 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+.pages span.active{
+  background-color: #f97316;
 }
 
-div {
-    border: 1px solid black;
+.list{
+  transform: scale(0);
 }
 
-.header {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    width: 100vw;
-    height: 6vw;
+.dropdown .change-color{
+  color: #f97316;
 }
 
-.navigasi {
-    width: 20rem;
+.list.over{
+  transform: scale(1);
 }
 
-.navigasi ul {
-    display: flex;
-    justify-content: space-between;
-    list-style: none;
+.acc{
+  transform: scale(0);
 }
 
-input {
-    width: 20vw;
-    padding: 10px 20px;
-    border-radius: 20px;
-    border: 0;
-    background-color: #f3f3f3;
-}
-
-.item {
-    width: 8rem;
-}
-
-.item ul {
-    display: flex;
-    justify-content: space-between;
-    list-style: none;
-}
-
-.thumbnail {
-    display: flex;
-    width: 100%;
-    height: 60vh;
-    object-fit: cover;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid black;
-}
-
-.contant {
-    margin: 10vh 5vw 0 5vw;
-}
-
-.card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 15vw;
-    height: 40vh;
-}
-
-.card-thumbnail {
-    width: 100%;
-    height: 70%;
-    object-fit: cover;
-    background-color: #d9d9d9;
+.acc.raise{
+  transform: scale(1);
 }
