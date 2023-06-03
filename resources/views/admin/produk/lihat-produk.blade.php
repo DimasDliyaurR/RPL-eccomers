@@ -24,96 +24,36 @@
               <th>Nama Produk</th>
               <th>Kategori</th>
               <th>Stok</th>
+              <th>Harga</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody class="table-border-bottom-0">
-            <tr>
-              <td>1</td>
-              <td><a href="lihat-produk/produk-dtl" style="color: #697a8d;">LANDSKRONA</a></td>
-              <td>Sofa</td>
-              <td>20</td>
-              <td>
-                <div class="dropdown">
-                  <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                    <i class="bx bx-dots-vertical-rounded"></i>
-                  </button>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" href="/lihat-produk/produk-edit"
-                      ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                    >
-                    <a class="dropdown-item" href="javascript:void(0);"
-                      ><i class="bx bx-trash me-1"></i> Delete</a
-                    >
-                  </div>
-                </div>
-              </td>
-            </tr>
 
+            @foreach ($produk as $key => $pd)
             <tr>
-              <td>2</td>
-              <td><a href="/lihat-produk/produk-dtl" style="color: #697a8d;">LANDSKRONA</a></td>
-              <td>Sofa</td>
-              <td>20</td>
+              <td>{{ $key +1 }}</td>
+              <td><a href="lihat-produk/produk-dtl" style="color: #697a8d;">{{ $pd->nama_produk }}</a></td>
+              <td>{{ $pd->id_kategori }}</td>
+              <td>{{ $pd->stok }}</td>
+              <td>{{ $pd->harga }}</td>
               <td>
                 <div class="dropdown">
                   <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                     <i class="bx bx-dots-vertical-rounded"></i>
                   </button>
                   <div class="dropdown-menu">
-                    <a class="dropdown-item" href="/lihat-produk/produk-edit"
+                    <a class="dropdown-item" href="/lihat-produk/produk-edit/{{ $pd->id }}"
                       ><i class="bx bx-edit-alt me-1"></i> Edit</a
                     >
-                    <a class="dropdown-item" href="javascript:void(0);"
+                    <a class="dropdown-item" href="/lihat-produk/dltProduk/{{ $pd->id }}"
                       ><i class="bx bx-trash me-1"></i> Delete</a
                     >
                   </div>
                 </div>
               </td>
             </tr>
-            <tr>
-              <td>3</td>
-              <td><a href="/lihat-produk/produk-dtl" style="color: #697a8d;">LANDSKRONA</a></td>
-              <td>Sofa</td>
-              <td>20</td>
-              <td>
-                <div class="dropdown">
-                  <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                    <i class="bx bx-dots-vertical-rounded"></i>
-                  </button>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" href="/lihat-produk/produk-edit"
-                      ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                    >
-                    <a class="dropdown-item" href="javascript:void(0);"
-                      ><i class="bx bx-trash me-1"></i> Delete</a
-                    >
-                  </div>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>4</td>
-              <td><a href="/lihat-produk/produk-dtl" style="color: #697a8d;">LANDSKRONA</a></td>
-              <td>Sofa</td>
-              <td>20</td>
-              <td>
-                <div class="dropdown">
-                  <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                    <i class="bx bx-dots-vertical-rounded"></i>
-                  </button>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" href="/lihat-produk/produk-edit"
-                      ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                    >
-                    <a class="dropdown-item" href="javascript:void(0);"
-                      ><i class="bx bx-trash me-1"></i> Delete</a
-                    >
-                  </div>
-                </div>
-              </td>
-            </tr>
+            @endforeach
           </tbody>
         </table>
       </div>

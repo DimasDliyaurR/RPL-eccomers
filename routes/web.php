@@ -41,6 +41,7 @@ Route::middleware('admin')->group(function () {
         // Tabel Produk
         Route::get('/dashboard/lihat-produk', 'index_lihat_produk');
         Route::get('/dashboard/tambah-produk', 'index_tambah_produk');
+        Route::get('lihat-produk/produk-edit/{id}', 'index_produk_edit'); // form edit
         Route::get('/dashboard/lihat-produk/produk-dtl', 'index_produk_dtl');
         Route::get('/dashboard/tambah-stok', 'index_tambah_stok');
 
@@ -52,6 +53,13 @@ Route::middleware('admin')->group(function () {
         Route::get('/dashboard/user', 'index_user');
         Route::get('/dashboard/user/user-dtl', 'index_user_dtl');
 })->name('dashboard');
+
+Route::controller(ProdukController::class)->group(function(){
+    // insert data produk
+    Route::post('tambah-produk/addNew', 'addNew');
+    Route::post('lihat-produk/dltProduk/{id}', 'dltProduk'); //error
+    Route::post('updateProduk/{id}',[ProdukController::class] ,'updateProduk')->name('updateProduk/{id}'); //error
+});
 
     // Route::get('/dashboard', function () {
     //     return view('admin/dashboard',[

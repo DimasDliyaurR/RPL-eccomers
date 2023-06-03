@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\Produk;
 
 class adminController extends Controller
 {
@@ -19,9 +20,10 @@ class adminController extends Controller
 
     public function index_lihat_produk()
     {
-        return view('admin/produk/lihat-produk',[
+        $produk = Produk::all();
+        return view('admin/lihat-produk',[
             "tittle" => "Lihat Produk"
-        ]);
+        ],compact('produk'));
     }
 
     public function index_tambah_produk()
@@ -37,6 +39,14 @@ class adminController extends Controller
             "tittle" => "Tambah Stok"
         ]);
     }  
+
+    public function index_produk_edit($id)
+    {
+        $produk = Produk::find($id);
+        return view('admin/produk-edit',[
+            "tittle" => "Lihat Produk"
+        ],compact('produk'));
+    }
 
     // Tabel Order
 
@@ -54,6 +64,7 @@ class adminController extends Controller
             "tittle" => "Order Terkirim"
         ]);
     }
+
 
     // Tabel User
 
