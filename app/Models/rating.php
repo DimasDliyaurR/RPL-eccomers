@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class produk extends Model
+class rating extends Model
 {
     use HasFactory;
 
-    protected $table = 'produk';
+    protected $table = 'rating';
+
     protected $fillable = [
-    'nama_produk', 
-    'id_kategori',
-    'harga', 
-    'stok', 
-    'deskripsi', 
-    'gambar', 
-];
+        'id_rating',
+        'id_produk',
+        'id_user',
+        'komentar',
+        'nilai',
+    ];
 }
