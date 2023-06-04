@@ -15,8 +15,12 @@ class AdminAcces
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->user()->level == 'admin') {
-            return $next($request);
+        if (auth()->user()->level){
+            if (auth()->user()->level == 'admin') {
+                return $next($request);
+            }
+        }else{
+            abort(403);
         }
         abort(403);
     }

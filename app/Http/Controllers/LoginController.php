@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -21,25 +22,29 @@ class LoginController extends Controller
 
     public function regris_insert_user(Request $request)
     {
-        $this->validate($request,[
-            'username' => 'required',
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required|unique:users|email:rfc,dns',
-            'password' => 'required',
-            'repassword' => 'required', 'same:password',
-        ]
-        ,[
-            'username.required' => 'Username Tidak Boleh Kosong',
-            'first_name.required' => 'Nama Depan Tidak Boleh Kosong',
-            'last_name.required' => 'Nama Belakang Tidak Boleh Kosong',
-            'email.required' => 'Email Tidak Boleh Kosong',
-            'email.unique' => 'Email Sudah Terdaftar',
-            'email.email' => 'Email Tidak Valid',
-            'password.required' => 'Password Tidak Boleh Kosong',
-            'repassword.required' => 'Re-Password Tidak Boleh Kosong',
-            'repassword.same' => 'Password Tidak Sama'
-        ]);
+        $this->validate(
+            $request,
+            [
+                'username' => 'required',
+                'first_name' => 'required',
+                'last_name' => 'required',
+                'email' => 'required|unique:users|email:rfc,dns',
+                'password' => 'required',
+                'repassword' => 'required',
+                'same:password',
+            ],
+            [
+                'username.required' => 'Username Tidak Boleh Kosong',
+                'first_name.required' => 'Nama Depan Tidak Boleh Kosong',
+                'last_name.required' => 'Nama Belakang Tidak Boleh Kosong',
+                'email.required' => 'Email Tidak Boleh Kosong',
+                'email.unique' => 'Email Sudah Terdaftar',
+                'email.email' => 'Email Tidak Valid',
+                'password.required' => 'Password Tidak Boleh Kosong',
+                'repassword.required' => 'Re-Password Tidak Boleh Kosong',
+                'repassword.same' => 'Password Tidak Sama',
+            ],
+        );
 
         $data = [
             'username' => $request->username,
@@ -56,34 +61,31 @@ class LoginController extends Controller
 
     public function login_action(Request $request)
     {
-        if(Auth::attempt($request->only('username','password'))){
+        if (Auth::attempt($request->only('username', 'password'))) {
             return redirect('dashboard');
-
         }
     }
 
     // Admin Login Access
-    public function index_admin(){
+    public function index_admin()
+    {
         return view('auth.mid_adminLogin');
     }
 
     public function admin_token(Request $req)
     {
-        $this->validate($req,[
+        $this->validate($req, [
             'token_admin' => 'required',
         ]);
 
         $token = $req->token_admin;
 
-        if($token == "dfgthy"){
-
+        if ($token == 'dfgthy') {
             $req->session()->put('token_admin', $token);
             return redirect('/821e728e7129e718e789');
-        }else{
+        } else {
             return abort(403);
         }
-        
-
     }
 
     public function index_admin_login()
@@ -91,26 +93,16 @@ class LoginController extends Controller
         return view('auth.loginAdmin');
     }
 
-    public function admin_login(Request $request)
+    public function admin_login_regris(Request $request)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             'username' => 'required',
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required|unique:users|email:rfc,dns',
             'password' => 'required',
-            'repassword' => 'required', 'same:password',
-        ]
-        ,[
-            'username.required' => 'Username Tidak Boleh Kosong',
-            'first_name.required' => 'Nama Depan Tidak Boleh Kosong',
-            'last_name.required' => 'Nama Belakang Tidak Boleh Kosong',
-            'email.required' => 'Email Tidak Boleh Kosong',
-            'email.unique' => 'Email Sudah Terdaftar',
-            'email.email' => 'Email Tidak Valid',
-            'password.required' => 'Password Tidak Boleh Kosong',
-            'repassword.required' => 'Re-Password Tidak Boleh Kosong',
-            'repassword.same' => 'Password Tidak Sama'
+            'repassword' => 'required',
+            'same:password',
         ]);
 
         $data = [
@@ -118,12 +110,10 @@ class LoginController extends Controller
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,
-            'level' => 'admin',
+            'level' => $request->level,
             'password' => H::make($request->password),
         ];
-
-        // return dump($data);
-        return redirect('loginAdmin')->with('success', 'Data Berhasil Di Tambahkan');
+        User::create($data);
+        return redirect('login');
     }
-
 }

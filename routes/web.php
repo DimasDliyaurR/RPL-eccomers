@@ -28,9 +28,14 @@ Route::controller(appController::class)->group(function(){
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::controller(ProfileController::class)->group(function (){
+        Route::get('/profile','edit')->name('profile.edit');
+        Route::patch('/profile','update')->name('profile.update');
+        Route::delete('/profile','destroy')->name('profile.destroy');
+    });
+
+
 });
 
 Route::middleware('admin')->group(function () {
@@ -51,65 +56,14 @@ Route::middleware('admin')->group(function () {
         // Produk User
         Route::get('/dashboard/user', 'index_user');
         Route::get('/dashboard/user/user-dtl', 'index_user_dtl');
+
 })->name('dashboard');
 
-    // Route::get('/dashboard', function () {
-    //     return view('admin/dashboard',[
-    //         "tittle" => "Dashboard"
-    //     ]);
-    // })->middleware(['auth', 'verified'])->name('dashboard');;
-    
-    // Route::get('/dashboard/lihat-produk', function () {
-    //     return view('admin/lihat-produk',[
-    //         "tittle" => "Lihat Produk"
-    //     ]);
-    // });
-    // Route::get('/dashboard/lihat-produk/produk-dtl', function () {
-    //     return view('admin/produk-dtl',[
-    //         "tittle" => "Lihat Produk"
-    //     ]);
-    // });
     Route::get('/dashboard/lihat-produk/produk-edit', function () {
         return view('admin/produk-edit',[
             "tittle" => "Lihat Produk"
         ]);
     });
-    
-    // Route::get('/dashboard/tambah-produk', function () {
-    //     return view('admin/tambah-produk',[
-    //         "tittle" => "Tambah Produk"
-    //     ]);
-    // });
-    
-    // Route::get('/dashboard/tambah-stok', function () {
-    //     return view('admin/tambah-stok',[
-    //         "tittle" => "Tambah Stok"
-    //     ]);
-    // });
-    
-    // Route::get('/dashboard/order-masuk', function () {
-    //     return view('admin/order-masuk',[
-    //         "tittle" => "Order Masuk"
-    //     ]);
-    // });
-    
-    // Route::get('/dashboard/order-terkirim', function () {
-    //     return view('admin/order-terkirim',[
-    //         "tittle" => "Order Terkirim"
-    //     ]);
-    // });
-    
-    // Route::get('/dashboard/user', function () {
-    //     return view('admin/user',[
-    //         "tittle" => "Akun User"
-    //     ]);
-    // });
-    
-    // Route::get('/dashboard/user/user-dtl', function () {
-    //     return view('admin/user-dtl',[
-    //         "tittle" => "User Detail"
-    //     ]);
-    // });
 
 });
 require __DIR__.'/auth.php';

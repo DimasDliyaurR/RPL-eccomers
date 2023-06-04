@@ -43,6 +43,7 @@ Route::middleware('guest')->group(function () {
     // login admin
     Route::post('/admin_mid',[LoginController::class , 'admin_token'])->name('AdminAccess');
     Route::get('821e728e7129e718e789',[LoginController::class , 'index_admin_login'])->name('AdminLogin');
+    Route::post('821e728e7129e718e789/regris',[LoginController::class,'admin_login_regris'])->name('AdminLogin');
 
     
 

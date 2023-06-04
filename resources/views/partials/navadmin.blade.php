@@ -48,13 +48,13 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="auth-login-basic.html">
-                            <i class="bx bx-power-off me-2"></i>
-                            <form action="logout">
-                                <x-input-label for="" :value="__('logout')" />
-                                <input class="align-middle" type="submit">
-                            </form>
-                        </a>
+                        <form action="logout" method="POST">
+                            @csrf
+                            <button class="dropdown-item">
+                                <i class="bx bx-power-off me-2"></i>
+                                <span class="align-middle">Logout</span>
+                            </button>
+                        </form>
                     </li>
                 </ul>
             </li>
