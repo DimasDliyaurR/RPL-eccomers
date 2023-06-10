@@ -44,26 +44,32 @@ Route::middleware('admin')->group(function () {
         Route::get('/dashboard', 'index_dashboard');
 
         // Tabel Produk
-        Route::get('/dashboard/lihat-produk', 'index_lihat_produk');
-        Route::get('/dashboard/tambah-produk', 'index_tambah_produk');
-        Route::get('/dashboard/lihat-produk/produk-dtl', 'index_produk_dtl');
-        Route::get('/dashboard/tambah-stok', 'index_tambah_stok');
-
+        Route::get('/dashboard/lihat-produk', 'index_lihat_produk'); // Liat data produk
+        Route::get('/dashboard/lihat-produk/produk-dtl/{id}', 'index_produk_dtl');  //lihat detail produk
+        Route::get('/dashboard/lihat-produk/produk-edit/{id}', 'index_produk_edit'); // form edit
+        Route::get('/dashboard/tambah-produk', 'index_tambah_produk');   // Tambah Produk
+        
+        Route::get('/dashboard/tambah-stok', 'index_tambah_stok');  // tambah stok
+    
         // Produk Order
         Route::get('/dashboard/order-masuk', 'index_order_masuk');
         Route::get('/dashboard/order-terkirim', 'index_order_terkirim');
-
+    
         // Produk User
         Route::get('/dashboard/user', 'index_user');
-        Route::get('/dashboard/user/user-dtl', 'index_user_dtl');
+        Route::get('/dashboard/user-dtl', 'index_user_dtl');
 
 })->name('dashboard');
 
-    Route::get('/dashboard/lihat-produk/produk-edit', function () {
-        return view('admin/produk-edit',[
-            "tittle" => "Lihat Produk"
-        ]);
-    });
 
+});
+
+Route::controller(ProdukController::class)->group(function(){
+    // insert data produk
+    Route::post('/dashboard/tambah-produk/addNew','addNew'); // aman
+    Route::delete('/dashboard/lihat-produk/dltProduk/{id}','dltProduk');
+    Route::post('/dashboard/lihat-produk/produk-edit/updProduk/{id}','updProduk'); 
+    // Tambah Stok
+    Route::post('/dashboard/tambah-stok/tmbStok/{id}','tmbStok'); // aman
 });
 require __DIR__.'/auth.php';

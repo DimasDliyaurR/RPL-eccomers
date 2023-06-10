@@ -29,48 +29,22 @@
             </tr>
           </thead>
           <tbody class="table-border-bottom-0">
+            @foreach ($produk as $key => $pd)
             <tr>
-              <td>1</td>
-              <td>LANDSKRONA</td>
-              <td>Sofa</td>
-              <td>20</td>
-              <td><input type="text" class="form-control" id="basic-default-fullname" style="width: 60px;"/></td>
-              <td>
-                <button type="submit" class="btn btn-primary w-20px">Tambah</button>
-              </td>
-            </tr>
+              <td>{{ $key +1 }}</td>
+              <td>{{ $pd->nama_produk }}</td>
+              <td>{{ $pd->id_kategori }}</td>
+              <td>{{ $pd->stok }}</td>
 
-            <tr>
-              <td>2</td>
-              <td>LANDSKRONA</td>
-              <td>Sofa</td>
-              <td>20</td>
-              <td><input type="text" class="form-control" id="basic-default-fullname" style="width: 60px;"/></td>
+              <form action="tambah-stok/tmbStok/{{ $pd->id }}" method="post">
+                @csrf
+              <td><input type="number" class="form-control" name="stok" id="basic-default-fullname" style="width: 80px;"/></td>
               <td>
-                <button type="submit" class="btn btn-primary w-20px">Tambah</button>
+                  <button type="submit" class="btn btn-success w-20px">Tambah</button>
+                </form>
               </td>
             </tr>
-            <tr>
-              <td>3</td>
-              <td>LANDSKRONA</td>
-              <td>Sofa</td>
-              <td>20</td>
-              <td><input type="text" class="form-control" id="basic-default-fullname" style="width: 60px;"/></td>
-              <td>
-                <button type="submit" class="btn btn-primary w-20px">Tambah</button>
-              </td>
-            </tr>
-
-            <tr>
-              <td>4</td>
-              <td>LANDSKRONA</td>
-              <td>Sofa</td>
-              <td>20</td>
-              <td><input type="text" class="form-control" id="basic-default-fullname" style="width: 60px;"/></td>
-              <td>
-                <button type="submit" class="btn btn-primary w-20px">Tambah</button>
-              </td>
-            </tr>
+            @endforeach
           </tbody>
         </table>
       </div>
@@ -88,5 +62,7 @@
 
 @endsection
           <!-- Content wrapper -->
+
+
 
 
