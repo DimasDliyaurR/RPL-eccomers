@@ -59,16 +59,18 @@ Route::middleware('admin')->group(function () {
         Route::get('/dashboard/lihat-produk/produk-edit/{id}', 'index_produk_edit'); // form edit
         
     
-        // Produk Order
+        // Tabel Order
         Route::get('/dashboard/order-masuk', 'index_order_masuk');
         Route::get('/dashboard/order-terkirim', 'index_order_terkirim');
     
-        // Produk User
+        // Tabel User
         Route::get('/dashboard/user', 'index_user');
         Route::get('/dashboard/user-dtl', 'index_user_dtl');
         
-        // insert data produk
-    // Tambah Stok
+        // Tabel Kategori
+        Route::get('/dashboard/kategori-lihat', 'index_kategori_lihat');
+        Route::get('/dashboard/kategori-tambah', 'index_kategori_tambah');
+
 
 })->name('dashboard');
 
