@@ -8,6 +8,7 @@
 
             <!--Search-->
             <form class="d-flex mb-4" onsubmit="return false">
+                @csrf
                 <input class="form-control me-1" type="search" placeholder="Search" aria-label="Search" style="width: 50%;" />
                 <button class="btn btn-outline-primary" type="submit">Search</button>
             </form>
