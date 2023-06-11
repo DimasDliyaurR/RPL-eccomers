@@ -5,6 +5,7 @@ use App\Http\Controllers\appController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\orderSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,8 +25,6 @@ Route::get('/', function () {
 Route::controller(appController::class)->group(function(){
     Route::get('/','index');
 });
-
-
 
 Route::middleware('auth')->group(function () {
 
@@ -75,7 +74,4 @@ Route::middleware('admin')->group(function () {
 
 });
 
-Route::controller(ProdukController::class)->group(function(){
-    
-});
 require __DIR__.'/auth.php';
