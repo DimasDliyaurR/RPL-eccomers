@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\OrderSessionController;
+use App\Http\Controllers\orderSessionController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\VerifyEmailController;
@@ -68,7 +68,9 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
 
-    Route::view('/order', 'payment.detail');
+    Route::controller(orderSessionController::class)->group(function () {
+        Route::get('order/{id}','index');
+    });
     Route::view('/detail', 'payment.detail_after');
     Route::view('/count', 'payment.countdown');
     Route::view('/cart', 'payment.keranjang');
