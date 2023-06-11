@@ -41,8 +41,6 @@ Route::middleware('guest')->group(function () {
     Route::get('adminLog', [LoginController::class, 'index_admin'])->name('AdminAccess');
 
     // login admin
-    Route::post('/admin_mid', [LoginController::class, 'admin_token'])->name('AdminAccess');
-    Route::get('821e728e7129e718e789', [LoginController::class, 'index_admin_login'])->name('AdminLogin');
 });
 
 
