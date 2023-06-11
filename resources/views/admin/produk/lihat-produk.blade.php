@@ -7,17 +7,12 @@
         <div class="container-xxl flex-grow-1 container-p-y">
 
             <!--Search-->
-            <form class="d-flex mb-4" onsubmit="return false">
-                <input class="form-control me-1" type="search" placeholder="Search" aria-label="Search" style="width: 50%;" />
+            <form class="d-flex mb-4" action="/dashboard/tambah-stok" method="GET">
+                <input class="form-control me-1" type="text" placeholder="Search" name="search" aria-label="Search"
+                    style="width: 40%;" />
                 <button class="btn btn-outline-primary" type="submit">Search</button>
             </form>
             <!--Search-->
-    <!--Search-->
-    <form class="d-flex mb-4" action="/dashboard/tambah-stok" method="GET">
-      <input class="form-control me-1" type="text" placeholder="Search" name="search" aria-label="Search" style="width: 40%;"/>
-      <button class="btn btn-outline-primary" type="submit">Search</button>
-    </form>
-    <!--Search-->
             <!-- Striped Rows -->
             <div class="card">
                 <div class="table-responsive text-nowrap">
@@ -34,6 +29,7 @@
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
+
                             @foreach ($produk as $key => $pd)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>

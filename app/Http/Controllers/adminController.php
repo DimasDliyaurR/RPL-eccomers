@@ -25,7 +25,7 @@ class adminController extends Controller
     {
         $search = $request->input('search');
 
-        if ($search != "") {
+        if ($search) {
             // Jika form pencarian tidak kosong, cari produk berdasarkan nama_produk
             $produk = DB::table('produks')
                 ->join('kategoris', 'produks.id_kategori', '=', 'kategoris.id')
@@ -33,10 +33,7 @@ class adminController extends Controller
                 ->where('nama_produk', 'LIKE', '%'.$search.'%')
                 ->get();
         }else {
-            $produk = DB::table('produks')
-            ->select('produks.*', 'kategoris.nama_kategori')
-            ->join('kategoris', 'produks.id_kategori', '=', 'kategoris.id')
-            ->get();
+            $produk = Produk::all();
         }
 
         return view('admin.produk.lihat-produk',[
@@ -72,7 +69,7 @@ class adminController extends Controller
     public function main_tambah_produk(Request $request)
     {
         // upload gambar
-        $gambar = $request->file('image');
+        $gambar = $request->file('gambar');
         $path = null;
     
         if ($gambar) {
@@ -87,7 +84,6 @@ class adminController extends Controller
             'harga' => $request->harga,
             'deskripsi' => $request->deskripsi
         ];
-        
         DB::table('produks')->insert($data);
         return redirect('/dashboard/lihat-produk');
     }
@@ -108,9 +104,13 @@ class adminController extends Controller
             $produk = Produk::all();
         }
 
+        $kategori = kategori::all();
+
         return view('admin.produk.tambah-stok',[
-            "tittle" => "Tambah Stok"
-        ],compact('produk'));
+            "tittle" => "Tambah Stok",
+            'produk' => $produk,
+            'kategori' => $kategori
+        ]);
     }  
 
     public function main_tambah_stok(Request $request,$id){
@@ -124,17 +124,17 @@ class adminController extends Controller
     public function index_produk_edit($id)
     {
         $produk = DB::table('produks')
-            ->join('kategoris', 'produks.id_kategori', '=', 'kategoris.id')
+            ->join('kategoris', 'kategoris.id', '=', 'produks.id_kategori')
             ->select('produks.*', 'kategoris.nama_kategori')
-            ->where('produks.id_produk', $id) 
-            ->first(); 
+            ->where('produks.id_produk', $id)
+            ->get();
 
-        if (!$produk) {
-            abort(404);
-        }
+        $kategori = kategori::all();
         return view('admin.produk.produk-edit',[
-            "tittle" => "Lihat Produk"
-        ],compact('produk'));
+            "tittle" => "Lihat Produk",
+            'produk' => $produk,
+            'kategori' => $kategori
+        ]);
     }
 
     public function main_produk_edit(Request $request, $id)

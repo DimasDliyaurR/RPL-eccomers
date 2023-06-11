@@ -21,7 +21,6 @@ use App\Http\Controllers\orderSessionController;
 Route::get('/', function () {
     return view('login');
 });
-
 Route::controller(appController::class)->group(function(){
     Route::get('/','index');
 });
