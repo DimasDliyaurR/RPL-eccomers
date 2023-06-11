@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamp('tanggal_pemesanan')
             ->nullable()
             ->useCurrent();
-
+            $table->enum('status', ['Belum Dikirim', 'Dikirim'])->nullable()->default('Belum Dikirim');
             $table->decimal('total_harga');
             $table->timestamps();
 

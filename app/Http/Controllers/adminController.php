@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Produk;
+use App\Models\Pemesanan;
 
 class adminController extends Controller
 {
@@ -205,6 +206,14 @@ class adminController extends Controller
         ]);
     }
 
+    public function index_order_detail()
+    {
+        
+        return view('admin.order.order-detail',[
+            "tittle" => "Order Masuk", "title" => "Order Terkirim"
+        ]);
+    }
+
     public function index_order_terkirim()
     {
         return view('admin.order.order-terkirim',[
@@ -212,15 +221,53 @@ class adminController extends Controller
         ]);
     }
 
+    public function pemesanan()
+    {
+        $pemesanan = Pemesanan::where('status', 'belum dikirim')->get();
+        return view('/index', compact('pemesanan'));
+    }
+
+    public function selectPemesananDikirim()
+    {
+        $pemesanan = Pemesanan::where('status', 'dikirim')->get();
+        
+        return view('/kirim', compact('pemesanan'));
+    }
+
+    public function updateStatus(Request $request, $id) {
+        DB::table('pemesanan')->where('id_pemesanan', $id)->update([
+            'status' => 'dikirim'
+        ]);
+        return redirect('/index');
+    }
+
+    public function detail_pemesanan($id)
+    {
+        $detail_pemesanan = DB::table('detail_pemesanan')->where('id_pemesanan', $id);
+        return view('/detail', compact('detail_pemesanan'));
+    }
+
     // Tabel User
 
-    public function index_user()
+    public function index_user(Request $request)
     {
-        return view('admin.user.user',[
-            "tittle" => "User",
-            'users' => User::all()
+        $search = $request->input('search');
+    
+        if ($search != "") {
+            $users = DB::table('users')
+                ->where('users.first_name', 'LIKE', '%'.$search.'%')
+                ->orWhere('users.last_name', 'LIKE', '%'.$search.'%')
+                ->get();
+        } else {
+            $users = User::all();
+        }
+        
+        return view('admin.user.user', [
+            "tittle" => "Akun User",
+            "users" => $users
         ]);
     }
+    
 
     public function index_user_dtl()
     {

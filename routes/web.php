@@ -61,6 +61,7 @@ Route::middleware('admin')->group(function () {
     
         // Produk Order
         Route::get('/dashboard/order-masuk', 'index_order_masuk');
+        Route::get('/dashboard/order-detail/{id}', 'index_order_detail');
         Route::get('/dashboard/order-terkirim', 'index_order_terkirim');
     
         // Produk User
@@ -71,6 +72,13 @@ Route::middleware('admin')->group(function () {
     // Tambah Stok
 
 })->name('dashboard');
+Route::get('/index', [PemesananController::class, 'pemesanan'])->name('index.pemesanan');
+
+Route::get('/kirim', [PemesananController::class, 'selectPemesananDikirim'])->name('index.selectPemesananDikirim');
+
+Route::post('/index/updateStatus/{id}', [PemesananController::class, 'updateStatus'])->name('index.pemesanan');
+
+Route::get('/detail/{id}', [PemesananController::class, 'detail_pemesanan'])->name('detail.detail_pemesanan');
 
 
 });

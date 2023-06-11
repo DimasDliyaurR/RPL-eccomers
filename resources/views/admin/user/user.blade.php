@@ -7,10 +7,10 @@
         <div class="container-xxl flex-grow-1 container-p-y">
 
             <!--Search-->
-            <form class="d-flex mb-4" onsubmit="return false">
-                <input class="form-control me-1" type="search" placeholder="Search" aria-label="Search" style="width: 50%;" />
+            <form class="d-flex mb-4" action="/dashboard/user" method="GET">
+                <input class="form-control me-1" type="text" placeholder="Search" name="search" aria-label="Search" style="width: 40%;"/>
                 <button class="btn btn-outline-primary" type="submit">Search</button>
-            </form>
+              </form>
             <!--Search-->
 
             <!-- Striped Rows -->
@@ -20,6 +20,7 @@
                         <thead>
                             <tr>
                                 <th>Nomor</th>
+                                <th>username</th>
                                 <th>Nama User</th>
                                 <th>Email</th>
                                 <th>level</th>
@@ -27,10 +28,11 @@
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
-                            @foreach ($users as $user)
+                            @forelse ($users as $user)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $user->username }}</td>
+                                    <td>{{ $user->first_name }} {{ $user->last_name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->level }}</td>
                                     <td>
@@ -48,7 +50,11 @@
                                         </div>
                                     </td>
                                 </tr>
-                            @endforeach
+                                @empty
+                                <tr>
+                                    <td colspan="5">Tidak ada user yang ditemukan.</td>
+                                </tr>
+                            @endforelse
 
                         </tbody>
                     </table>
