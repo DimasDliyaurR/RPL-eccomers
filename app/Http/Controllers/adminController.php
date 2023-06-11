@@ -53,27 +53,31 @@ class adminController extends Controller
     public function index_tambah_produk()
     {
         return view('admin.produk.tambah-produk',[
-            "tittle" => "Tambah Produk"
+            "tittle" => "Tambah Produk",
+            "kategori" => kategori::all()
         ]); 
     }
     
     public function main_tambah_produk(Request $request)
     {
-        
         // upload gambar
+        $gambar = $request->file('image');
+        $path = null;
+    
+        if ($gambar) {
+            $path = $gambar->store('public/image');
+        }
 
-        $data = [
-        'nama_produk' => $request->nama_produk,
-        'id_kategori' => $request->id_kategori,
-        'gambar' => $request->file('image')->store('public/img'),
-        'stok' => $request->stok,
-        'harga' => $request->harga,
-        'deskripsi' => $request->deskripsi
+        $data =[
+            'nama_produk' => $request->nama_produk,
+            'id_kategori' => $request->id_kategori,
+            'gambar' => $path,
+            'stok' => $request->stok,
+            'harga' => $request->harga,
+            'deskripsi' => $request->deskripsi
         ];
-        // dd($data);
-
+        
         DB::table('produks')->insert($data);
-
         return redirect('/dashboard/lihat-produk');
     }
 
@@ -87,12 +91,11 @@ class adminController extends Controller
         ],compact('produk'));
     }  
 
-    public function main_tambah_stok(Request $request){
-        $produk = Produk::findOrFail($request->id);
-        $newStok = $produk->stok + $request->stok;
-        
-        // Update Stok
-        $produk->update(['stok'=>$newStok]);
+    public function main_tambah_stok(Request $request,$id){
+        $produk = DB::table('produks')->where('id_produk',$id)->first();
+
+        $newStok = $produk->stokd + $request->stok;
+        DB::table('produks')->where('id_produk',$id)->update(['stok'=>$newStok]);
         return redirect('/dashboard/tambah-stok');
     }
 
@@ -145,10 +148,14 @@ class adminController extends Controller
 
     public function main_produk_delete($id)
     {
-        $produk = Produk::findOrFail($id);
-        $produk->delete();
+        $produk = DB::table('produks')->where('id_produk',$id)->first();
+        if ($produk->gambar)
+        {
+            Storage::delete($produk->gambar);
+        }
+        DB::table('produks')->where('id_produk',$id)->delete();
         
-        return redirect('dashboard.lihat-produk');
+        return redirect('/dashboard/lihat-produk');
     }
 
     // Tabel Order
@@ -198,8 +205,33 @@ class adminController extends Controller
     public function index_kategori_tambah()
     {
         return view("admin.kategori.kategori-tambah",[
-            "tittle" => "Kategori Tambah"
+            "tittle" => "Kategori Tambah",
+            "produk" => kategori::all()
         ]);
+    }
+
+    public function main_kategori_tambah(Request $request)
+    {
+        $data = $request->validate([
+            'nama_kategori'=>'required'
+        ]);
+
+        $data = [
+            'nama_kategori' => $request->nama_kategori
+        ];
+
+        DB::table('kategoris')->insert($data);
+        return redirect('/dashboard/kategori-lihat');
+    }
+    public function main_kategori_update(Request $request,$id)
+    {
+
+
+        $id = DB::table('kategoris')->where('id',$id)->update([
+            "nama_kategori" => $request->nama_kategori
+        ]);
+
+        return redirect('/dashboard/kategori-lihat');
     }
 
 
