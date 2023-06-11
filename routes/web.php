@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\appController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\orderSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,8 +25,6 @@ Route::controller(appController::class)->group(function(){
     Route::get('/','index');
 });
 
-
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -40,4 +39,9 @@ Route::middleware('admin')->group(function () {
 
 
 });
+
+Route::controller(orderSessionController::class)->group(function(){
+    Route::get('/order','index');
+});
+
 require __DIR__.'/auth.php';

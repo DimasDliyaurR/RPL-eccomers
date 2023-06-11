@@ -10,9 +10,17 @@ export default {
     ],
 
     theme: {
+        container: {
+            center: true
+        },
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+            },
+            colors: {
+                primary: '#f97316',
+                secondary: '#cbd5e1',
+                detail:  '#94a3b8'
             },
         },
     },
