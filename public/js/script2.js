@@ -124,3 +124,41 @@ min.addEventListener('click', ()=>{
     quan.innerHTML = currentQuan; 
   };
 });
+
+// Rating
+// Mengambil referensi ke elemen-elemen HTML yang diperlukan
+const ratingStars = document.querySelectorAll('#ratingStars svg');
+const ratingValue = document.getElementById('ratingValue');
+const currentRating = document.getElementById('currentRating');
+
+// Menambahkan event listener untuk setiap bintang
+ratingStars.forEach((star, index) => {
+  star.addEventListener('mouseover', ()=> {
+    highlightStars(index);
+  });
+
+  star.addEventListener('mouseout', ()=>{
+    resetStars()
+  });
+});
+
+// Mewarnai bintang sesuai rating yang dihover
+function highlightStars(index) {
+  ratingStars.forEach((star, i) => {
+    if (i <= index) {
+      star.classList.add('fill-yellow-500');
+    } else {
+      star.classList.remove('fill-yellow-500');
+    }
+  });
+}
+
+// Mengatur ulasan rating kembali ke nilai awal saat keluar dari bintang
+function resetStars() {
+  ratingStars.forEach((star, index) => {
+    star.classList.remove('fill-yellow-500');
+  });
+};
+
+// Mengosongkan ulasan rating saat halaman dimuat
+resetStars();

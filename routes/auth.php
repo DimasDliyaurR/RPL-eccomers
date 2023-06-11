@@ -68,5 +68,8 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
 
-    Route::get('/order',[OrderSessionController::class,'index']);
+    Route::view('/order', 'payment.detail');
+    Route::view('/detail', 'payment.detail_after');
+    Route::view('/count', 'payment.countdown');
+    Route::view('/cart', 'payment.keranjang');
 });
