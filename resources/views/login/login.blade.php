@@ -67,7 +67,7 @@
                                 placeholder="Username" name="username">
                             <input type="text"
                                 class="rounded-2xl border-none my-2 placeholder-black-300 focus:outline-none focus:ring-2 focus:ring-orange-50 focus:placeholder-white"
-                                placeholder="Password" name="password">
+                                placehold	er="Password" name="password">
 
                             <button
                                 class="w-[14rem] rounded-full bg-gradient-to-r from-yellow-200 to-white hover:bg-gradient-to-tr hover:from-white hover:to-yellow-200 my-10 ">Login</button>

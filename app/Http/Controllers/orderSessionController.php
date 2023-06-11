@@ -8,6 +8,6 @@ class orderSessionController extends Controller
 {
     public function index()
     {
-        return view("detail.detail");
+        return view("payment.detail");
     }
 }
