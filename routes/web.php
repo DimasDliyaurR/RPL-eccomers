@@ -40,8 +40,6 @@ Route::middleware('admin')->group(function () {
 
 });
 
-Route::controller(orderSessionController::class)->group(function(){
-    Route::get('/order','index');
-});
+
 
 require __DIR__.'/auth.php';
