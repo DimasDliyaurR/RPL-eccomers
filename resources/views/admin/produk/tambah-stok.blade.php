@@ -8,11 +8,23 @@
   <div class="container-xxl flex-grow-1 container-p-y">
 
     <!--Search-->
-    <form class="d-flex mb-4" onsubmit="return false">
-      <input class="form-control me-1" type="search" placeholder="Search" aria-label="Search" style="width: 50%;"/>
+    <form class="d-flex mb-4" action="/dashboard/tambah-stok" method="GET">
+      <input class="form-control me-1" type="text" placeholder="Search" name="search" aria-label="Search" style="width: 40%;"/>
       <button class="btn btn-outline-primary" type="submit">Search</button>
     </form>
     <!--Search-->
+
+    @if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
+
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
 
     <!-- Striped Rows -->
     <div class="card">
@@ -29,14 +41,14 @@
             </tr>
           </thead>
           <tbody class="table-border-bottom-0">
-            @foreach ($produk as $key => $pd)
+            @forelse ($produk as $key => $pd)
             <tr>
               <td>{{ $key +1 }}</td>
               <td>{{ $pd->nama_produk }}</td>
               <td>{{ $pd->id_kategori }}</td>
               <td>{{ $pd->stok }}</td>
 
-              <form action="tambah-stok/tmbStok/{{ $pd->id }}" method="post">
+              <form action="tambah-stok/tmbStok/{{ $pd->id_produk }}" method="post">
                 @csrf
               <td><input type="number" class="form-control" name="stok" id="basic-default-fullname" style="width: 80px;"/></td>
               <td>
@@ -44,7 +56,11 @@
                 </form>
               </td>
             </tr>
-            @endforeach
+            @empty
+            <tr>
+              <td colspan="5">Tidak ada produk yang ditemukan.</td>
+            </tr>
+            @endforelse
           </tbody>
         </table>
       </div>

@@ -6,7 +6,9 @@
   <!-- Content -->
 
   <div class="container-xxl flex-grow-1 container-p-y">
-    <button type="submit" class="btn btn-primary w-20px">Kembali</button>
+    <a href="/dashboard/lihat-produk">
+      <button type="submit" class="btn btn-primary w-20px">Kembali</button>
+    </a>
 
       <div class="card p-4 mt-4">
         <div class="row">
@@ -21,7 +23,7 @@
               </ol>
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                  <img class="d-block" src="{{ asset('storage/app/' . $produk->image) }}" alt="First slide" style="max-width: 300px; height: auto;">
+                  <img class="d-block" src="{{ asset('storage/app/' . $produk->gambar) }}" alt="First slide" style="max-width: 300px; height: auto;">
                 </div>
                 <div class="carousel-item">
                   <img class="d-block" src="/assets/img/elements/2.jpg" alt="Second slide" style="max-width: 300px; height: auto;">
@@ -67,25 +69,37 @@
                   <tr>
                     <td class="px-0">Harga</td>
                     <td>:</td>
-                    <td>{{ $produk->nama_produk }}</td>
+                    <td>{{ number_format($produk->harga, 0, ',', '.') }}</td>
                   </tr>
                 </tbody>
               </table>
               
-              <div class="mt-3">
-                <a href="/dashboard/tambah-stok/tmbStok">
+              <div class="d-flex gap-3 mt-3">
+                <a href="/dashboard/tambah-stok">
                   <button type="submit" class="btn btn-success w-20px">Tambah Stok</button>
                 </a>
-                <a href="/dashboard/lihat-produk/produk-edit/{id}">
-                  <button type="submit" class="btn btn-primary w-20px mx-2">Edit</button>
+                <a href="/dashboard/lihat-produk/produk-edit/{{ $produk->id_produk }}">
+                  <button type="submit" class="btn btn-primary w-20px">Edit</button>
                 </a>
-                <a href="/dashboard/lihat-produk/dltProduk/{id}">
-                  <button type="submit" class="btn btn-danger w-20px">Hapus</button>
-                </a>
-              </div>
+                <form id="deleteForm{{ $produk->id_produk }}" action="/dashboard/lihat-produk/dltProduk/{{ $produk->id_produk }}" method="POST">
+                  @csrf
+                  @method('DELETE')
+                  <button type="submit" class="btn btn-danger w-20px" onclick="return confirmDelete(event, {{ $produk->id_produk }})">Delete</button>
+                </form>
+              </div> 
             </div>
           </div>
         </div>
+        <script>
+          function confirmDelete(event, id) {
+            event.preventDefault(); // Menghentikan tindakan default formulir
+            
+            // Menampilkan konfirmasi dialog
+            if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
+              document.getElementById('deleteForm' + id).submit(); // Mengirim formulir jika dikonfirmasi
+            }
+          }
+        </script>
 
   </div>
 

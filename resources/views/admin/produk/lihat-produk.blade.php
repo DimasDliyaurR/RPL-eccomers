@@ -8,8 +8,8 @@
   <div class="container-xxl flex-grow-1 container-p-y">
 
     <!--Search-->
-    <form class="d-flex mb-4" onsubmit="return false">
-      <input class="form-control me-1" type="search" placeholder="Search" aria-label="Search" style="width: 50%;"/>
+    <form class="d-flex mb-4" action="/dashboard/tambah-stok" method="GET">
+      <input class="form-control me-1" type="text" placeholder="Search" name="search" aria-label="Search" style="width: 40%;"/>
       <button class="btn btn-outline-primary" type="submit">Search</button>
     </form>
     <!--Search-->
@@ -30,10 +30,10 @@
           </thead>
           <tbody class="table-border-bottom-0">
 
-            @foreach ($produk as $key => $pd)
+            @forelse ($produk as $key => $pd)
             <tr>
               <td>{{ $key +1 }}</td>
-              <td><a href="lihat-produk/produk-dtl/{{ $pd->id }}" style="color: #697a8d;">{{ $pd->nama_produk }}</a></td>
+              <td><a href="lihat-produk/produk-dtl/{{ $pd->id_produk }}" style="color: #697a8d;">{{ $pd->nama_produk }}</a></td>
               <td>{{ $pd->nama_kategori }}</td>
               <td>{{ $pd->stok }}</td>
               <td>{{ $pd->harga }}</td>
@@ -43,24 +43,25 @@
                     <i class="bx bx-dots-vertical-rounded"></i>
                   </button>
                   <div class="dropdown-menu d-absolute">
-                    <a class="dropdown-item" href="lihat-produk/produk-edit/{{ $pd->id }}"
+                    <a class="dropdown-item" href="lihat-produk/produk-edit/{{ $pd->id_produk }}"
                       ><i class="bx bx-edit-alt me-1"></i> Edit</a>
 
-                      <form action="lihat-produk/dltProduk/{{ $pd->id }}" method="POST">
+                      <form action="lihat-produk/dltProduk/{{ $pd->id_produk }}" method="POST">
                         @method('DELETE')
                         @csrf
                         <button type="submit" class="dropdown-item">
                             <i class="bx bx-trash me-1"></i> Delete
                         </button>
                     </form>
-
-                    {{-- <a class="dropdown-item" href="lihat-produk/dltProduk/{{ $pd->id }}"
-                      ><i class="bx bx-trash me-1"></i> Delete</a> --}}
                   </div>
                 </div>
               </td>
             </tr>
-            @endforeach
+            @empty
+            <tr>
+              <td colspan="5">Tidak ada produk yang ditemukan.</td>
+            </tr>
+            @endforelse
           </tbody>
         </table>
       </div>
