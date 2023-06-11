@@ -43,7 +43,7 @@ Route::middleware('admin')->group(function () {
         Route::get('/dashboard', 'index_dashboard');
 
         // Tabel Produk
-        Route::get('/dashboard/lihat-produk', 'index_lihat_produk'); // Liat data produk
+        Route::get('/dashboard/lihat-produk', 'index_lihat_produk'); // Lihat data produk
 
         Route::get('/dashboard/tambah-produk', 'index_tambah_produk');   // Tambah Produk
         Route::post('/dashboard/tambah-produk/addNew','main_tambah_produk'); // tambah
@@ -68,7 +68,10 @@ Route::middleware('admin')->group(function () {
         
         // Tabel Kategori
         Route::get('/dashboard/kategori-lihat', 'index_kategori_lihat');
+        Route::get('/dashboard/kategori-update/{id}', 'main_kategori_update');
+
         Route::get('/dashboard/kategori-tambah', 'index_kategori_tambah');
+        Route::post('/dashboard/kategori-tambah/tambah', 'main_kategori_tambah');
 
 
 })->name('dashboard');

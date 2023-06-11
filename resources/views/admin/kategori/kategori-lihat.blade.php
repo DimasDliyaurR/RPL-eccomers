@@ -31,33 +31,19 @@
                             @foreach ($produk as $key => $pd)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td></td>
-                                    <td>{{ $pd->harga }}</td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                                data-bs-toggle="dropdown">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu d-absolute">
-                                                <a class="dropdown-item"
-                                                    href="lihat-produk/produk-edit/{{ $pd->id }}"><i
-                                                        class="bx bx-edit-alt me-1"></i> Edit</a>
-
-                                                <form action="lihat-produk/dltProduk/{{ $pd->id }}" method="POST">
-                                                    @method('DELETE')
-                                                    @csrf
-                                                    <button type="submit" class="dropdown-item">
-                                                        <i class="bx bx-trash me-1"></i> Delete
-                                                    </button>
-                                                </form>
-
-                                                {{-- <a class="dropdown-item" href="lihat-produk/dltProduk/{{ $pd->id }}"
-                      ><i class="bx bx-trash me-1"></i> Delete</a> --}}
-                                            </div>
-                                        </div>
-                                    </td>
+                                    <td>{{ $pd->id }}</td>
+                                    <form action="/dashboard/kategori-update/{{ $pd->id }}">
+                                        @csrf
+                                        <td><input type="text" value="{{ $pd->nama_kategori }}"
+                                                class="form-label rounded p-2 border border-opacity-10"
+                                                name="nama_kategori">
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-primary"
+                                                onclick="return confirm('Apakah yakin merubah kategori?')">Update</button>
+                                        </td>
                                 </tr>
+                                </form>
                             @endforeach
                         </tbody>
                     </table>
