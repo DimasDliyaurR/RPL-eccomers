@@ -12,7 +12,12 @@
                 <button class="btn btn-outline-primary" type="submit">Search</button>
             </form>
             <!--Search-->
-
+    <!--Search-->
+    <form class="d-flex mb-4" action="/dashboard/tambah-stok" method="GET">
+      <input class="form-control me-1" type="text" placeholder="Search" name="search" aria-label="Search" style="width: 40%;"/>
+      <button class="btn btn-outline-primary" type="submit">Search</button>
+    </form>
+    <!--Search-->
             <!-- Striped Rows -->
             <div class="card">
                 <div class="table-responsive text-nowrap">
@@ -58,9 +63,7 @@
                                                         <i class="bx bx-trash me-1"></i> Delete
                                                     </button>
                                                 </form>
-
-                                                {{-- <a class="dropdown-item" href="lihat-produk/dltProduk/{{ $pd->id }}"
-                      ><i class="bx bx-trash me-1"></i> Delete</a> --}}
+                                                {{-- <a class="dropdown-item" href="lihat-produk/dltProduk/{{ $pd->id }}"><i class="bx bx-trash me-1"></i> Delete</a> --}}
                                             </div>
                                         </div>
                                     </td>
@@ -70,8 +73,6 @@
                     </table>
                 </div>
             </div>
-            <!--/ Striped Rows -->
-
 
             <!-- / Content -->
 

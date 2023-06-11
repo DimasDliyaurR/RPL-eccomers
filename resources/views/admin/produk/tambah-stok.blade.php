@@ -49,15 +49,10 @@
                     </table>
                 </div>
             </div>
-            <!--/ Striped Rows -->
-
-
             <!-- / Content -->
 
 
             <div class="content-backdrop fade"></div>
         </div>
-        <!-- Content wrapper -->
     </div>
 @endsection
-<!-- Content wrapper -->

@@ -10,20 +10,28 @@
     <!-- Striped Rows -->
       <div class="card mb-3">
         <div class="card-body">
-          <form action="updProduk/{{ $produk->id }}" method="POST" enctype="multipart/form-data">
+          <form action="updProduk/{{ $produk->id_produk }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div class="mb-3">
-              <label class="form-label" for="basic-default-fullname">Nama Produk</label>
+              <label class="form-label" for="basic-default-fullname">Nama Produk</label><br>
+              @error('nama_produk')
+              <span class="text-danger">{{ $message }}</span>
+              @enderror
               <input type="text" name="nama_produk" class="form-control" id="basic-default-fullname" 
               value="{{ $produk->nama_produk }}" placeholder="Nama Produk"/>
             </div>
+
             <div class="mb-3">
-                <label for="formFile" class="form-label">Gambar Produk</label>
-                <input class="form-control" name="image" type="file" id="formFile"/>
+                <label for="formFile" class="form-label">Gambar Produk</label><br>
+                <input class="form-control" name="gambar" type="file" id="formFile" value="{{ old('gambar', $produk->gambar) }}"/>
             </div>
+            
             <div class="mb-3">
-              <label for="exampleFormControlSelect1" class="form-label">Kategori Produk</label>
+              <label for="exampleFormControlSelect1" class="form-label">Kategori Produk</label><br>
+              @error('id_kategori')
+              <span class="text-danger">{{ $message }}</span>
+              @enderror
               <select name="id_kategori" class="form-select" id="exampleFormControlSelect1" 
                 aria-label="Default select example" style="width: 15%;">
                 <option value={{ $produk->id_kategori }} selected>{{ $produk->nama_kategori }}</option>
@@ -35,17 +43,29 @@
                 <option value="6">Rak</option>
               </select>
             </div>
+
             <div class="mb-3">
-              <label class="form-label" for="basic-default-email">Stok</label>
+              <label class="form-label" for="basic-default-email">Stok</label><br>
+              @error('stok')
+              <span class="text-danger">{{ $message }}</span>
+              @enderror
               <input type="text" name="stok" class="form-control" id="basic-default-fullname" value="{{ $produk->stok }}" placeholder="Jumlah Stok" />
             </div>
+
             <div class="mb-3">
-              <label class="form-label" for="basic-default-phone">Harga</label>
+              <label class="form-label" for="basic-default-phone">Harga</label><br>
+              @error('harga')
+              <span class="text-danger">{{ $message }}</span>
+              @enderror
               <input type="text" name="harga" id="basic-default-phone" class="form-control phone-mask"
                 value="{{ $produk->harga }}" placeholder="Rp." />
             </div>
+
             <div class="mb-3">
-              <label class="form-label" for="basic-default-message">Deskripsi</label>
+              <label class="form-label" for="basic-default-message">Deskripsi</label><br>
+              @error('deskripsi')
+              <span class="text-danger">{{ $message }}</span>
+              @enderror
               <textarea
                 id="summernote"
                 name="deskripsi"
