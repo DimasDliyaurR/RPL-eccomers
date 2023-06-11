@@ -76,4 +76,22 @@
             </a>
         </li>
 
+        <li class="menu-item {{ $tittle === 'Kategori' || $tittle === 'Kategori tambah' ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-cube-alt"></i>
+                <div data-i18n="Misc">Kategori</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ $tittle === 'Kategori' ? 'active' : '' }}">
+                    <a href="/dashboard/kategori-lihat" class="menu-link">
+                        <div data-i18n="Error">Lihat Kategori</div>
+                    </a>
+                <li class="menu-item {{ $tittle === 'Kategori Tambah' ? 'active' : '' }}">
+                    <a href="/dashboard/kategori-tambah" class="menu-link">
+                        <div data-i18n="Error">Tambah Kategori</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
 </aside>

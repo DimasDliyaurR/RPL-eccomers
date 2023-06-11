@@ -19,30 +19,25 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Nomor</th>
-                                <th>Nama Produk</th>
-                                <th>Kategori</th>
-                                <th>Stok</th>
-                                <th>Tambah Stok</th>
+                                <th>id Kategori</th>
+                                <th>Nama Kategori</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
-                            @foreach ($produk as $key => $pd)
-                                <tr>
-                                    <td>{{ $key + 1 }}</td>
-                                    <td>{{ $pd->nama_produk }}</td>
-                                    <td>{{ $pd->id_kategori }}</td>
-                                    <td>{{ $pd->stok }}</td>
 
-                                    <form action="/dashboard/tambah-stok/{{ $pd->id_produk }}" method="post">
+                            @foreach ($kategori as $key => $pd)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <form action="/dashboard/kategori-update/{{ $pd->id_kategori }}" method="post">
                                         @csrf
-                                        <td><input type="number" class="form-control" name="stok"
-                                                id="basic-default-fullname" style="width: 80px;" /></td>
+                                        <td><input type="text" class="form-control" name="nama_kategori"
+                                                id="basic-default-fullname" style="width: 80px;"
+                                                value="{{ $pd->nama_kategori }}" /></td>
                                         <td>
-                                            <button type="submit" class="btn btn-success w-20px">Tambah</button>
+                                            <button class="btn btn-info w-20px">Update</button>
+                                        </td>
                                     </form>
-                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

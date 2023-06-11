@@ -20,6 +20,7 @@ return new class extends Migration
             ->useCurrent();
 
             $table->decimal('total_harga');
+            $table->string('status');
             $table->timestamps();
 
         });
