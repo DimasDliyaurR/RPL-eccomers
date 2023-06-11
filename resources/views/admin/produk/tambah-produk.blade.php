@@ -1,7 +1,6 @@
 @extends('layouts/template')
 
 @section('content')
-
 <div class="content-wrapper">
   <!-- Content -->
 
@@ -82,16 +81,13 @@
 
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
-        </div>
-      </div>
-  </div>
+</div>
 
-  <script>
-    $('#summernote').summernote({
-      placeholder: 'Deskripsi....',
-      tabsize: 2,
-      height: 100
-    });
-  </script>
-
-@endsection         
+        <script>
+            $('#summernote').summernote({
+                placeholder: 'Deskripsi....',
+                tabsize: 2,
+                height: 100
+            });
+        </script>
+    @endsection

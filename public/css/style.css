@@ -21,3 +21,13 @@
 .acc.raise{
   transform: scale(1);
 }
+
+.jenis-warna .part-warna.warna-active{
+  background-color: #f97316;
+  color: #fff;
+}
+
+.jenis-tipe .part-tipe.tipe-active{
+  background-color: #f97316;
+  color: #fff;
+}

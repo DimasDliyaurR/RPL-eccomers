@@ -11,11 +11,16 @@ export default {
 
     theme: {
         container: {
-            center: true,
+            center: true
         },
         extend: {
             fontFamily: {
                 sans: ["poppins", ...defaultTheme.fontFamily.sans],
+            },
+            colors: {
+                primary: '#f97316',
+                secondary: '#cbd5e1',
+                detail:  '#94a3b8'
             },
         },
     },
