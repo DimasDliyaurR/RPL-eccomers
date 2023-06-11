@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\kategori;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -188,7 +189,17 @@ class adminController extends Controller
 
     public function index_kategori_lihat()
     {
-        return view("admin.kategori.kategori-lihat");
+        return view("admin.kategori.kategori-lihat",[
+            "tittle" => "Kategori Lihat",
+            "produk" => kategori::all()
+        ]);
+    }
+    
+    public function index_kategori_tambah()
+    {
+        return view("admin.kategori.kategori-tambah",[
+            "tittle" => "Kategori Tambah"
+        ]);
     }
 
 
