@@ -8,6 +8,7 @@
 
             <!--Search-->
             <form class="d-flex mb-4" onsubmit="return false">
+                @csrf
                 <input class="form-control me-1" type="search" placeholder="Search" aria-label="Search" style="width: 50%;" />
                 <button class="btn btn-outline-primary" type="submit">Search</button>
             </form>
@@ -20,39 +21,43 @@
                         <thead>
                             <tr>
                                 <th>Nomor</th>
-                                <th>Nama Produk</th>
-                                <th>Kategori</th>
-                                <th>Stok</th>
-                                <th>Tambah Stok</th>
+                                <th>Id Kategori</th>
+                                <th>Nama Kategori</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
+
                             @foreach ($produk as $key => $pd)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td>{{ $pd->nama_produk }}</td>
-                                    <td>{{ $pd->id_kategori }}</td>
-                                    <td>{{ $pd->stok }}</td>
-
-                                    <form action="/dashboard/tambah-stok/tmbStok/{{ $pd->id_produk }}" method="post">
+                                    <td>{{ $pd->id }}</td>
+                                    <form action="/dashboard/kategori-update/{{ $pd->id }}">
                                         @csrf
-                                        <td><input type="number" class="form-control" name="stok"
-                                                id="basic-default-fullname" style="width: 80px;" /></td>
+                                        <td><input type="text" value="{{ $pd->nama_kategori }}"
+                                                class="form-label rounded p-2 border border-opacity-10"
+                                                name="nama_kategori">
+                                        </td>
                                         <td>
-                                            <button type="submit" class="btn btn-success w-20px">Tambah</button>
-                                    </form>
-                                    </td>
+                                            <button class="btn btn-primary"
+                                                onclick="return confirm('Apakah yakin merubah kategori?')">Update</button>
+                                        </td>
                                 </tr>
+                                </form>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
+            <!--/ Striped Rows -->
+
+
             <!-- / Content -->
 
 
             <div class="content-backdrop fade"></div>
         </div>
+        <!-- Content wrapper -->
     </div>
 @endsection
+<!-- Content wrapper -->

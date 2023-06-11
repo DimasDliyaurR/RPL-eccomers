@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class orderSessionController extends Controller
+class OrderSessionController extends Controller
 {
     public function index()
     {
