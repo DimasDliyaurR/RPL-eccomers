@@ -74,6 +74,7 @@ Route::middleware('auth')->group(function () {
         //Cart
         Route::get('/cart/{id}','index_cart_lihat');
         Route::get('/cart-tambah/{id}','main_cart_tambah');
+        Route::get('cart/hapus/{id}','main_cart_hapus'); //DELETE
     });
 
     Route::view('/detail', 'payment.detail_after');

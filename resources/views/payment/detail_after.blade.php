@@ -73,10 +73,12 @@
                             </svg>
                         </div>
                     </div>
-
-                    <button type="submit"
-                        class="bg-primary w-full text-white py-3 mt-5 rounded-xl hover:bg-orange-600">Bayar
-                        Sekarang</button>
+                    <form action="{{ asset('count') }}">
+                        @csrf
+                        <button type="submit"
+                            class="bg-primary w-full text-white py-3 mt-5 rounded-xl hover:bg-orange-600">Bayar
+                            Sekarang</button>
+                    </form>
                 </div>
             </div>
         </div>

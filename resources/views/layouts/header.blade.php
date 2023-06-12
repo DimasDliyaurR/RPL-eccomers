@@ -3,7 +3,7 @@
     <div class="container bg-transparent flex justify-between items-center py-4 px-8">
         <!-- Logo -->
         <div class="flex items-end">
-            <img src="img/Logo.png" alt="Logo" class="w-10 h-10">
+            <img src="{{ asset('img/Logo.png') }}" alt="Logo" class="w-10 h-10">
             <a class="font-semibold text-primary" href="{{ url('/') }}">Furniture</a>
         </div>
 
