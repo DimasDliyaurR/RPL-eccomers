@@ -20,51 +20,26 @@
           <thead>
             <tr>
               <th>Nomor</th>
-              <th>Produk Order</th>
               <th>Nama User</th>
+              <th>tanggal pesan</th>
               <th>Alamat</th>
+              <th>Status</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody class="table-border-bottom-0">
-            <tr>
-              <td>1</td>
-              <td>LANDSKRONA</td>
-              <td>Julian Anshori</td>
-              <td>Perumahan Indah, Jakarta</td>
-              <td>
-                <button type="submit" class="btn btn-primary">detail</button>
-              </td>
-            </tr>
-
-            <tr>
-              <td>2</td>
-             <td>LANDSKRONA</td>
-              <td>Julian Anshori</td>
-              <td>Perumahan Indah, Jakarta</td>
-              <td>
-                  <button type="submit" class="btn btn-primary">detail</button>
-              </td>
-            </tr>
-            <tr>
-              <td>3</td>
-             <td>LANDSKRONA</td>
-              <td>Julian Anshori</td>
-              <td>Perumahan Indah, Jakarta</td>
-              <td>
-                <button type="submit" class="btn btn-primary">detail</button>
-              </td>
-            </tr>
-
-            <tr>
-              <td>4</td>
-             <td>LANDSKRONA</td>
-              <td>Julian Anshori</td>
-              <td>Perumahan Indah, Jakarta</td>
-              <td>
-                <button type="submit" class="btn btn-primary">detail</button>
-              </td>
-            </tr>
+            @foreach ($pemesanan as $key => $p)
+                <tr>
+                    <td>{{ $key + 1 }}</td>
+                    <td>{{ $p->first_name }} {{ $p->last_name }}</td>
+                    <td>{{ $p->tanggal_pemesanan }}</td>
+                    <td>alamat</td>
+                    <td>{{ $p->status }}</td>
+                    <td>
+                        <a href="order-detail/{{ $p->id_pemesanan }}" class="btn btn-secondary">Detail</a>
+                    </td>
+                </tr>
+            @endforeach
           </tbody>
         </table>
       </div>

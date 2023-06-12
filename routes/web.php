@@ -59,11 +59,13 @@ Route::middleware('admin')->group(function () {
     
         // Tabel Order
         Route::get('/dashboard/order-masuk', 'index_order_masuk');
+        Route::post('/dashboard/order-masuk/updateStatus/{id}', 'updateStatus');
+        Route::get('/dashboard/order-detail/{id}', 'index_order_detail');
         Route::get('/dashboard/order-terkirim', 'index_order_terkirim');
     
         // Tabel User
         Route::get('/dashboard/user', 'index_user');
-        Route::get('/dashboard/user-dtl', 'index_user_dtl');
+        Route::get('/dashboard/user/user-dtl/{id}', 'index_user_dtl');
         
         // Tabel Kategori
         Route::get('/dashboard/kategori-lihat', 'index_kategori_lihat');
@@ -72,9 +74,7 @@ Route::middleware('admin')->group(function () {
         Route::get('/dashboard/kategori-tambah', 'index_kategori_tambah');
         Route::post('/dashboard/kategori-tambah/tambah', 'main_kategori_tambah');
 
-
 })->name('dashboard');
-
 
 });
 

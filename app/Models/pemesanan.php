@@ -9,7 +9,8 @@ class pemesanan extends Model
 {
     use HasFactory;
 
-    protected $table = 'pemesanan';
+    protected $table = 'pemesanans';
+    protected $primaryKey = 'id_pemesanan';
 
     protected $fillable = [
         'id_pemesanan',
