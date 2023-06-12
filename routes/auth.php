@@ -69,8 +69,13 @@ Route::middleware('auth')->group(function () {
         ->name('logout');
 
     Route::controller(orderSessionController::class)->group(function () {
-        Route::get('order/{id}','index');
+        Route::get('/order/{id}','index_detail');
+
+        //Cart
+        Route::get('/cart/{id}','index_cart_lihat');
+        Route::get('/cart-tambah/{id}','main_cart_tambah');
     });
+
     Route::view('/detail', 'payment.detail_after');
     Route::view('/count', 'payment.countdown');
     Route::view('/cart', 'payment.keranjang');

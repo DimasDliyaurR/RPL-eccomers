@@ -13,7 +13,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
 </head>
 
@@ -25,11 +25,6 @@
     @yield('content')
 
     @include('layouts.footer')
-
-    <script src="{{ asset('/js/script.js') }}"></script>
-    <script src="{{ asset('/js/script2.js') }}"></script>
-    <script src="{{ asset('/js/script3.js') }}"></script>
-
 </body>
 
 </html>

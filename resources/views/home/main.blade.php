@@ -19,7 +19,7 @@
         @foreach ($produk as $key => $pd)
             <!-- Product Box -->
             <div class="product w-[16rem] pb-10 rounded-md overflow-x-hidden shadow-sm shadow-secondary">
-                <a href="order/{{ $pd->id_produk }}">
+                <a href="{{ asset('/order/' . $pd->id_produk) }}">
                     <div class="img overflow-hidden bg-secondary h-[13rem] w-[17rem] flex items-center">
                         <img src="{{ Storage::url($pd->gambar) }}" alt="Product" class="w-full">
                     </div>
@@ -47,7 +47,7 @@
                         <div class="rate-cart flex justify-between items-center mt-2">
                             <!-- Keranjang -->
                             <div class="button-cart">
-                                <a href="#"
+                                <a href="cart-tambah/{{ $pd->id_produk }}"
                                     class="text-[0.50rem] font-normal border border-secondary px-2 py-[0.15rem] rounded-full">+
                                     Keranjang</a>
                             </div>
@@ -739,4 +739,5 @@
 
 
         <!-- Javascript -->
+        <script src="{{ asset('/js/script.js') }}"></script>
     @endsection
