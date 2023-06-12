@@ -31,7 +31,7 @@ class OrderSessionController extends Controller
     public function index_cart_lihat()
     {
         $cart = DB::table('keranjangs')
-        ->select('keranjangs.*','produks.nama_produk','produks.deskripsi','kategoris.nama_kategori')
+        ->select('keranjangs.*','produks.nama_produk','produks.gambar','produks.deskripsi','kategoris.nama_kategori')
         ->join('produks','keranjangs.id_produk','=','produks.id_produk')
         ->join('kategoris','produks.id_kategori','=','kategoris.id')
         ->where('keranjangs.id_user',Auth::id())
@@ -56,5 +56,13 @@ class OrderSessionController extends Controller
         DB::table('keranjangs')->insert($data);
 
         return redirect('/');
+    }
+    
+    public function main_cart_hapus($id)
+    {
+
+        DB::table('keranjangs')->where('id',$id)->delete();
+
+        return redirect('/cart/'.Auth::id());
     }
 }

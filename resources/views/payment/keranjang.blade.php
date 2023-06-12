@@ -8,29 +8,27 @@
                 <h2 class="font-bold text-3xl border-b border-primary pb-3">Keranjang</h2>
                 @foreach ($cart as $key => $ct)
                     {{-- Product --}}
-                    <div class="container-bottom mt-10 flex items-center">
-                        <div class="container-img w-48 h-48 rounded-xl relative overflow-hidden flex items-center">
-                            <img class="absolute" src="img/example.jpg" alt="">
-                        </div>
+                    <a href="{{ asset('order/' . $ct->id_produk) }}">
 
-                        {{-- Isi Detail --}}
-                        <div class="spesifikasi ml-10 flex flex-col gap-4">
-                            <p class="font-semibold text-xl">{{ $ct->nama_produk }}</p>
-                            <p class="text-detail">{{ strip_tags($ct->deskripsi) }}</p>
-                            <p class="text-detail">{{ $ct->nama_kategori }}</p>
-                            <p class="font-semibold text-lg">Rp{{ $ct->harga }}</p>
+                        <div
+                            class="container-bottom mt-10 flex items-center hover:bg-secondary rounded-xl p-4 cursor-pointer">
+                            <div class="container-img w-48 h-48 rounded-xl relative overflow-hidden flex items-center">
+                                <img class="absolute" src="{{ Storage::url($ct->gambar) }}" alt="">
+                            </div>
+
+                            {{-- Isi Detail --}}
+                            <div class="spesifikasi ml-10 flex flex-col gap-4 w-full">
+                                <p class="font-semibold text-xl">{{ $ct->nama_produk }}</p>
+                                <p class="text-detail">{{ $ct->nama_kategori }}</p>
+                                <p class="font-semibold text-lg">Rp{{ $ct->harga }}</p>
+                                <a href="{{ asset('cart/hapus/' . $ct->id) }}" class="text-end hover:text-primary">hapus</a>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 @endforeach
 
 
 
-                <div class="total-cart flex justify-end">
-                    <p class="font-semibold text-lg">Total Harga :</p>
-                </div>
-                <div class="total-price flex justify-end">
-                    <p class="font-bold text-4xl text-primary">{{ $cart->sum('harga') }}</p>
-                </div>
             </div>
         </div>
     </section>

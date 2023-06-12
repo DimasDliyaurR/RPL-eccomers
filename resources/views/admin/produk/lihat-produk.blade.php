@@ -1,5 +1,4 @@
 @extends('layouts/template')
-
 @section('content')
     <div class="content-wrapper">
         <!-- Content -->
@@ -52,56 +51,70 @@
                                                     href="lihat-produk/produk-edit/{{ $pd->id_produk }}"><i
                                                         class="bx bx-edit-alt me-1"></i> Edit</a>
 
-    <!-- Striped Rows -->
-    <div class="card">
-      <div class="table-responsive text-nowrap">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Nomor</th>
-              <th>Nama Produk</th>
-              <th>Kategori</th>
-              <th>Stok</th>
-              <th>Harga</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody class="table-border-bottom-0">
+                                                <!-- Striped Rows -->
+                                                <div class="card">
+                                                    <div class="table-responsive text-nowrap">
+                                                        <table class="table table-striped">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Nomor</th>
+                                                                    <th>Nama Produk</th>
+                                                                    <th>Kategori</th>
+                                                                    <th>Stok</th>
+                                                                    <th>Harga</th>
+                                                                    <th>Actions</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody class="table-border-bottom-0">
 
-            @forelse ($produk as $key => $pd)
-            <tr>
-              <td>{{ $key +1 }}</td>
-              <td><a href="lihat-produk/produk-dtl/{{ $pd->id_produk }}" style="color: #697a8d;">{{ $pd->nama_produk }}</a></td>
-              <td>{{ $pd->nama_kategori }}</td>
-              <td>{{ $pd->stok }}</td>
-              <td>{{ number_format($pd->harga, 0, ',', '.') }}</td>
-              <td>
-                <div class="dropdown">
-                  <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                    <i class="bx bx-dots-vertical-rounded"></i>
-                  </button>
-                  <div class="dropdown-menu d-absolute">
-                    <a class="dropdown-item" href="lihat-produk/produk-edit/{{ $pd->id_produk }}"
-                      ><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                                @foreach ($produk as $key => $pd)
+                                                                    <tr>
+                                                                        <td>{{ $key + 1 }}</td>
+                                                                        <td><a href="lihat-produk/produk-dtl/{{ $pd->id_produk }}"
+                                                                                style="color: #697a8d;">{{ $pd->nama_produk }}</a>
+                                                                        </td>
+                                                                        <td>{{ $pd->nama_kategori }}</td>
+                                                                        <td>{{ $pd->stok }}</td>
+                                                                        <td>{{ number_format($pd->harga, 0, ',', '.') }}
+                                                                        </td>
+                                                                        <td>
+                                                                            <div class="dropdown">
+                                                                                <button type="button"
+                                                                                    class="btn p-0 dropdown-toggle hide-arrow"
+                                                                                    data-bs-toggle="dropdown">
+                                                                                    <i
+                                                                                        class="bx bx-dots-vertical-rounded"></i>
+                                                                                </button>
+                                                                                <div class="dropdown-menu d-absolute">
+                                                                                    <a class="dropdown-item"
+                                                                                        href="lihat-produk/produk-edit/{{ $pd->id_produk }}"><i
+                                                                                            class="bx bx-edit-alt me-1"></i>
+                                                                                        Edit</a>
 
-                      <form action="lihat-produk/dltProduk/{{ $pd->id_produk }}" method="POST">
-                        @method('DELETE')
-                        @csrf
-                        <button type="submit" class="dropdown-item">
-                            <i class="bx bx-trash me-1"></i> Delete
-                        </button>
-                    </form>
-                  </div>
+                                                                                    <form
+                                                                                        action="lihat-produk/dltProduk/{{ $pd->id_produk }}"
+                                                                                        method="POST">
+                                                                                        @method('DELETE')
+                                                                                        @csrf
+                                                                                        <button type="submit"
+                                                                                            class="dropdown-item">
+                                                                                            <i class="bx bx-trash me-1"></i>
+                                                                                            Delete
+                                                                                        </button>
+                                                                                    </form>
+                                                                                </div>
 
-                </div>
-            </div>
+                                                                            </div>
+                                                    </div>
 
-            <!-- / Content -->
+                                                    <!-- / Content -->
 
 
-            <div class="content-backdrop fade"></div>
-        </div>
-        <!-- Content wrapper -->
-    </div>
-@endsection
-<!-- Content wrapper -->
+                                                    <div class="content-backdrop fade"></div>
+                                                </div>
+                                                <!-- Content wrapper -->
+                                            </div>
+                            @endforeach
+                            @endforeach
+                        @endsection
+                        <!-- Content wrapper -->
