@@ -5,6 +5,7 @@ use App\Http\Controllers\appController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\orderSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,12 +21,9 @@ use App\Http\Controllers\ProfileController;
 Route::get('/', function () {
     return view('login');
 });
-
-Route::controller(appController::class)->group(function(){
-    Route::get('/','index');
+Route::controller(orderSessionController::class)->group(function(){
+    Route::get('/','index_home');
 });
-
-
 
 Route::middleware('auth')->group(function () {
 
@@ -44,7 +42,7 @@ Route::middleware('admin')->group(function () {
         Route::get('/dashboard', 'index_dashboard');
 
         // Tabel Produk
-        Route::get('/dashboard/lihat-produk', 'index_lihat_produk'); // Liat data produk
+        Route::get('/dashboard/lihat-produk', 'index_lihat_produk'); // Lihat data produk
 
         Route::get('/dashboard/tambah-produk', 'index_tambah_produk');   // Tambah Produk
         Route::post('/dashboard/tambah-produk/addNew','main_tambah_produk'); // tambah
@@ -59,22 +57,25 @@ Route::middleware('admin')->group(function () {
         Route::get('/dashboard/lihat-produk/produk-edit/{id}', 'index_produk_edit'); // form edit
         
     
-        // Produk Order
+        // Tabel Order
         Route::get('/dashboard/order-masuk', 'index_order_masuk');
         Route::post('/dashboard/order-masuk/updateStatus/{id}', 'updateStatus');
         Route::get('/dashboard/order-detail/{id}', 'index_order_detail');
         Route::get('/dashboard/order-terkirim', 'index_order_terkirim');
     
-        // Produk User
+        // Tabel User
         Route::get('/dashboard/user', 'index_user');
         Route::get('/dashboard/user/user-dtl/{id}', 'index_user_dtl');
         
+        // Tabel Kategori
+        Route::get('/dashboard/kategori-lihat', 'index_kategori_lihat');
+        Route::get('/dashboard/kategori-update/{id}', 'main_kategori_update');
+
+        Route::get('/dashboard/kategori-tambah', 'index_kategori_tambah');
+        Route::post('/dashboard/kategori-tambah/tambah', 'main_kategori_tambah');
 
 })->name('dashboard');
 
 });
 
-Route::controller(ProdukController::class)->group(function(){
-    
-});
 require __DIR__.'/auth.php';
