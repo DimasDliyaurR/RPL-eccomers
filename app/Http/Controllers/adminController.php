@@ -201,50 +201,54 @@ class adminController extends Controller
 
     public function index_order_masuk()
     {
-        return view('admin.order.order-masuk',[
-            "tittle" => "Order Masuk"
-        ]);
-    }
-
-    public function index_order_detail()
-    {
+        $pemesanan = Pemesanan::join('users', 'users.id', '=', 'pemesanans.user_id')
+            ->join('profiles', 'users.id', '=', 'profiles.id_user')
+            ->select('users.first_name', 'users.last_name', 'profiles.alamat', 'pemesanans.*', 'pemesanans.id_pemesanan')
+            ->where('pemesanans.status', 'Belum Dikirim')
+            ->get();
+    
         
-        return view('admin.order.order-detail',[
-            "tittle" => "Order Masuk", "title" => "Order Terkirim"
-        ]);
+        return view('admin.order.order-masuk', [
+            "tittle" => "Order Masuk"
+        ], compact('pemesanan'));
     }
+    
+
+    public function index_order_detail($id)
+    {
+        $pemesanan = DB::table('d_pemesanans')
+            ->join('pemesanans', 'pemesanans.id_pemesanan', '=', 'd_pemesanans.id_pemesanan')
+            ->join('produks', 'produks.id_produk', '=', 'd_pemesanans.id_produk')
+            ->join('kategoris', 'kategoris.id', '=', 'produks.id_kategori')
+            ->join('users', 'users.id', '=', 'pemesanans.user_id')
+            ->select('d_pemesanans.*','d_pemesanans.harga as total', 'produks.nama_produk', 'produks.harga', 'kategoris.nama_kategori')
+            ->where('pemesanans.id_pemesanan', $id) 
+            ->get(); 
+        
+        return view('admin.order.order-detail', [
+            "tittle" => "Order Masuk", "title" => "Order Terkirim"
+        ], compact('pemesanan'));
+    }
+    
 
     public function index_order_terkirim()
     {
+        $pemesanan = Pemesanan::join('users', 'users.id', '=', 'pemesanans.user_id')
+            ->join('profiles', 'users.id', '=', 'profiles.id_user')
+            ->select('users.first_name', 'users.last_name', 'profiles.alamat', 'pemesanans.*', 'pemesanans.id_pemesanan')
+            ->where('pemesanans.status', 'Dikirim')
+            ->get();
+
         return view('admin.order.order-terkirim',[
             "tittle" => "Order Terkirim"
+        ],compact('pemesanan'));
+    }
+
+    public function updateStatus($id) {
+        DB::table('pemesanans')->where('id_pemesanan', $id)->update([
+            'status' => 'Dikirim'
         ]);
-    }
-
-    public function pemesanan()
-    {
-        $pemesanan = Pemesanan::where('status', 'belum dikirim')->get();
-        return view('/index', compact('pemesanan'));
-    }
-
-    public function selectPemesananDikirim()
-    {
-        $pemesanan = Pemesanan::where('status', 'dikirim')->get();
-        
-        return view('/kirim', compact('pemesanan'));
-    }
-
-    public function updateStatus(Request $request, $id) {
-        DB::table('pemesanan')->where('id_pemesanan', $id)->update([
-            'status' => 'dikirim'
-        ]);
-        return redirect('/index');
-    }
-
-    public function detail_pemesanan($id)
-    {
-        $detail_pemesanan = DB::table('detail_pemesanan')->where('id_pemesanan', $id);
-        return view('/detail', compact('detail_pemesanan'));
+        return redirect('/dashboard/order-terkirim');
     }
 
     // Tabel User
@@ -269,12 +273,19 @@ class adminController extends Controller
     }
     
 
-    public function index_user_dtl()
+    public function index_user_dtl($id)
     {
-        return view('admin/user/user-dtl',[
+        $user = User::join('profiles', 'users.id', '=', 'profiles.id_user')
+            ->where('users.id', $id)
+            ->select('users.first_name', 'users.username','users.last_name', 'users.email', 'profiles.*')
+            ->first();
+    
+        return view('admin/user/user-dtl', [
             "tittle" => "User Detail"
-        ]);
+        ], compact('user'));
     }
+    
+    
 
     // Tabel Kategoris
 

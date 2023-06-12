@@ -28,16 +28,15 @@
             </tr>
           </thead>
           <tbody class="table-border-bottom-0">
-            @foreach ($pemesanan as $pesanan)
+            @foreach ($pemesanan as $key => $p)
                 <tr>
-                    <td>{{ $pesanan->id_pemesanan }}</td>
-                    <td>{{ $pesanan->user_id }}</td>
-                    <td>{{ $pesanan->keranjang_id }}</td>
-                    <td>{{ $pesanan->tgl_pemesanan }}</td>
-                    <td>{{ $pesanan->total_harga }}</td>
-                    <td>{{ $pesanan->status }}</td>
+                    <td>{{ $key + 1 }}</td>
+                    <td>{{ $p->first_name }} {{ $p->last_name }}</td>
+                    <td>{{ $p->tanggal_pemesanan }}</td>
+                    <td>alamat</td>
+                    <td>{{ $p->status }}</td>
                     <td>
-                        <a href="/detail/{{ $pesanan->id_pemesanan }}" class="btn btn-primary">Detail</a>
+                        <a href="order-detail/{{ $p->id_pemesanan }}" class="btn btn-secondary">Detail</a>
                     </td>
                 </tr>
             @endforeach

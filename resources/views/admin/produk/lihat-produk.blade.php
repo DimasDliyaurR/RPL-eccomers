@@ -36,7 +36,7 @@
               <td><a href="lihat-produk/produk-dtl/{{ $pd->id_produk }}" style="color: #697a8d;">{{ $pd->nama_produk }}</a></td>
               <td>{{ $pd->nama_kategori }}</td>
               <td>{{ $pd->stok }}</td>
-              <td>{{ $pd->harga }}</td>
+              <td>{{ number_format($pd->harga, 0, ',', '.') }}</td>
               <td>
                 <div class="dropdown">
                   <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">

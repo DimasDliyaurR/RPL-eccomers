@@ -23,7 +23,7 @@
               </ol>
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                  <img class="d-block" src="{{ asset('storage/app/' . $produk->gambar) }}" alt="First slide" style="max-width: 300px; height: auto;">
+                  <img class="d-block" src="{{ Storage::url('gambar/' . $produk->gambar) }}" alt="First slide" style="max-width: 300px; height: auto;">
                 </div>
                 <div class="carousel-item">
                   <img class="d-block" src="/assets/img/elements/2.jpg" alt="Second slide" style="max-width: 300px; height: auto;">

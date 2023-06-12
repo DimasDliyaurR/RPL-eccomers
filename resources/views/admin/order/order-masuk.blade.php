@@ -28,22 +28,22 @@
             </tr>
           </thead>
           <tbody class="table-border-bottom-0">
-            @foreach ($pemesanan as $pesanan)
+            @foreach ($pemesanan as $key => $p)
             <tr>
-              <td>{{ $pesanan->id_pemesanan }}</td>
-              <td>{{ $pesanan->user_id }}</td>
-              <td>{{ $pesanan->keranjang_id }}</td>
-              <td>{{ $pesanan->tgl_pemesanan }}</td>
-              <td>{{ $pesanan->total_harga }}</td>
-              <td>{{ $pesanan->status }}</td>
+              <td>{{ $key + 1 }}</td>
+              <td>{{ $p->first_name }} {{ $p->last_name }}</td>
+              <td>{{ $p->tanggal_pemesanan }}</td>
+              <td>{{ $p->alamat }}</td>
+              <td>{{ $p->status }}</td>
               <td>
-                <form action="/index/updateStatus/{{ $pesanan->id_pemesanan }}" method="POST">
+                <div class="d-flex gap-2">                
+                  <a href="order-detail/{{ $p->id_pemesanan }}" class="btn btn-secondary">Detail</a>
+
+                  <form action="order-masuk/updateStatus/{{ $p->id_pemesanan }}" method="POST">
                     @csrf
-                    <button type="submit" class="btn btn-primary">Kirim</button>
+                    <button type="submit" class="btn btn-primary mr-2">Kirim</button>
                 </form>
-              </td>
-              <td>
-                  <a href="/detail/{{ $pesanan->id_pemesanan }}" class="btn btn-primary">Detail</a>
+                </div>
               </td>
             </tr>
         @endforeach

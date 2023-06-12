@@ -42,7 +42,7 @@
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="/user/user-dtl"><i
+                                                <a class="dropdown-item" href="user/user-dtl/{{ $user->id }}"><i
                                                         class="bx bx-edit-alt me-1"></i> detail</a>
                                                 <a class="dropdown-item" href=""><i class="bx bx-trash me-1"></i>
                                                     Delete</a>
