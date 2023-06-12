@@ -21,8 +21,8 @@ use App\Http\Controllers\orderSessionController;
 Route::get('/', function () {
     return view('login');
 });
-Route::controller(appController::class)->group(function(){
-    Route::get('/','index');
+Route::controller(orderSessionController::class)->group(function(){
+    Route::get('/','index_home');
 });
 
 Route::middleware('auth')->group(function () {
